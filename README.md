@@ -1,7 +1,3 @@
-Berikut adalah template **README** untuk proyek GitHub yang menjelaskan tentang **sumber data**, **struktur direktori**, **tools**, dan penjelasan lainnya:
-
----
-
 # Arxiv Scraping Project
 
 ## Deskripsi
