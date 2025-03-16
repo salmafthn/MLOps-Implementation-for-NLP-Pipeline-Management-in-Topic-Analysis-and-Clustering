@@ -18,8 +18,15 @@ Pada halaman ini, penelitian-penelitian terkait **machine learning** dapat ditem
 
 ```
 MLOps/
-├── judul_penelitian.csv      # Hasil scraping berisi daftar judul penelitian
-└── README.md                 # Dokumentasi proyek ini
+│── eksplorasi/                    # Eksplorasi untuk lebih mengenali data
+│   ├── analisis_statistik.py
+│   ├── visualisasi_wordcloud.py
+│   ├── tfidf_bert_embeddings.py
+│   ├── preprocessing_pipeline.py
+├── judul_penelitian.csv            # Hasil scraping berisi daftar judul penelitian
+├── notebook.ipnyb            
+├── scrapping.py            
+└── README.md                       # Dokumentasi proyek ini
 ```
 
 ---
