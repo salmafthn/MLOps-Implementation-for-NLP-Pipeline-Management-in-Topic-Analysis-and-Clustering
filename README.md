@@ -24,7 +24,7 @@ MLOps/
 │   ├── tfidf_bert_embeddings.py
 │   ├── preprocessing_pipeline.py
 ├── judul_penelitian.csv            # Hasil scraping berisi daftar judul penelitian
-├── notebook.ipnyb            
+├── notebook.ipynb            
 ├── scrapping.py            
 └── README.md                       # Dokumentasi proyek ini
 ```
