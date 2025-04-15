@@ -18,15 +18,19 @@ Pada halaman ini, penelitian-penelitian terkait **machine learning** dapat ditem
 
 ```
 MLOps/
+│── api/                           # Service API
+│   ├── Dockerfile
+│   ├── api.py
+│   ├── requirements.txt
 │── eksplorasi/                    # Eksplorasi untuk lebih mengenali data
 │   ├── analisis_statistik.py
 │   ├── visualisasi_wordcloud.py
 │   ├── tfidf_bert_embeddings.py
 │   ├── preprocessing_pipeline.py
-├── judul_penelitian.csv            # Hasil scraping berisi daftar judul penelitian
+├── README.md                       # Dokumentasi proyek ini
+├── judul_penelitian.csv            # Hasil scraping berisi daftar judul penelitian            
 ├── notebook.ipynb            
-├── scrapping.py            
-└── README.md                       # Dokumentasi proyek ini
+└── scrapping.py
 ```
 
 ---
