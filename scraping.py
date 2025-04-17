@@ -32,26 +32,41 @@ def scrape_titles():
         for result in results:
             try:
                 title = result.find("p", class_="title").text.strip()
-                abstract = result.find("span", class_="abstract-full").text.strip().replace("▼ Less", "")
                 authors = [a.text.strip() for a in result.find("p", class_="authors").find_all("a")]
                 published_line = result.find("p", class_="is-size-7").text.strip()
                 year = published_line.split(";")[0].split()[-1]
 
-                # Placeholder fields
-                doi = None
-                journal_conference_name = None
-                publisher = "arXiv"
-                group_name = None
+                # Abstrak
+                abstract_tag = result.find("span", class_="abstract-full")
+                if abstract_tag:
+                    # Hilangkan semua tag <a> atau elemen yang mengandung 'Less'
+                    for less_elem in abstract_tag.find_all(string=lambda text: 'Less' in text):
+                        less_elem.extract()
+
+                    abstract = abstract_tag.get_text(strip=True)
+                else:
+                    abstract = None
+
+                # Ambil link ke halaman detail
+                detail_link = result.find("p", class_="list-title").find("a")["href"]
+                detail_res = requests.get(detail_link)
+                detail_soup = BeautifulSoup(detail_res.text, "html.parser")
+
+                # Ekstrak journal & doi
+                journal_tag = detail_soup.find("td", class_="tablecell jref")
+                journal_conference_name = journal_tag.text.strip() if journal_tag else None
+                doi_tag = detail_soup.find("a", href=lambda href: href and "doi.org" in href)
+                doi = doi_tag.text.strip() if doi_tag else None
 
                 all_data.append({
                     "title": title,
                     "abstract": abstract,
                     "authors": authors,
                     "journal_conference_name": journal_conference_name,
-                    "publisher": publisher,
+                    "publisher": "arXiv",
                     "year": int(year),
                     "doi": doi,
-                    "group_name": group_name
+                    "group_name": "Anomali"
                 })
             except Exception as e:
                 print(f"Error memproses satu hasil: {e}")
