@@ -12,7 +12,7 @@ def scrape_titles():
     all_data = []
 
     # Loop dari halaman 1 sampai 15 (0 sampai 700 dengan step 50)
-    for page in range(15):
+    for page in range(10):
         start = page * 50
         url = base_url + str(start)
         print(f"Scraping halaman {page + 1}: {url}")
@@ -61,13 +61,25 @@ def scrape_titles():
 
     print(f"Total data baru: {len(all_data)}")
 
-    # Simpan hasil baru (hapus data lama)
-    new_df = pd.DataFrame(all_data)
-
-    # Simpan ke file baru (overwrite)
+    # Simpan atau gabungkan ke CSV dan JSON
     csv_file = "judul_penelitian.csv"
     json_file = "judul_penelitian.json"
-    new_df.to_csv(csv_file, index=False, encoding="utf-8")
-    new_df.to_json(json_file, orient="records", indent=4, force_ascii=False)
+    new_df = pd.DataFrame(all_data)
+
+    # Gabung dengan data lama jika ada
+    if os.path.exists(csv_file):
+        old_df = pd.read_csv(csv_file)
+        combined_df = pd.concat([old_df, new_df], ignore_index=True)
+    else:
+        combined_df = new_df
+
+    # Hapus duplikat berdasarkan title (case-insensitive)
+    combined_df["title_lower"] = combined_df["title"].str.lower()
+    combined_df.drop_duplicates(subset=["title_lower"], inplace=True)
+    combined_df.drop(columns=["title_lower"], inplace=True)
+
+    # Simpan ke CSV dan JSON
+    combined_df.to_csv(csv_file, index=False, encoding="utf-8")
+    combined_df.to_json(json_file, orient="records", indent=4, force_ascii=False)
 
     print(f"Scraping selesai, data disimpan ke {csv_file} dan {json_file}")
