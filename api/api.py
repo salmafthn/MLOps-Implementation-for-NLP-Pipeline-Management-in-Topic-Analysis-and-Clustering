@@ -2,8 +2,9 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import os
-import scraping
+import scraping.scraping as scraping
 import json
+from training.train_topic_model import run_training
 
 app = FastAPI()
 
@@ -52,6 +53,14 @@ def run_scraping():
     try:
         scraping.scrape_titles()
         return {"message": "Scraping selesai, data diperbarui dan disimpan ke CSV & JSON."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/train-topic-model/")
+def train_topic_model_endpoint():
+    try:
+        run_training()
+        return {"message": "Training berhasil! Model disimpan."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
