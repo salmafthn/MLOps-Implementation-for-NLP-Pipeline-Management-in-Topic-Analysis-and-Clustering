@@ -5,14 +5,12 @@ import time
 import os
 import json
 
-# Base URL arXiv HTML
 base_url = "https://arxiv.org/search/cs?query=machine+learning&searchtype=all&abstracts=show&order=-announced_date_first&size=50&start="
 
 def scrape_titles():
     all_data = []
 
-    # Loop dari halaman 1 sampai 15 (0 sampai 700 dengan step 50)
-    for page in range(10):
+    for page in range(50):
         start = page * 50
         url = base_url + str(start)
         print(f"Scraping halaman {page + 1}: {url}")
@@ -39,7 +37,6 @@ def scrape_titles():
                 # Abstrak
                 abstract_tag = result.find("span", class_="abstract-full")
                 if abstract_tag:
-                    # Hilangkan semua tag <a> atau elemen yang mengandung 'Less'
                     for less_elem in abstract_tag.find_all(string=lambda text: 'Less' in text):
                         less_elem.extract()
 
@@ -47,12 +44,10 @@ def scrape_titles():
                 else:
                     abstract = None
 
-                # Ambil link ke halaman detail
                 detail_link = result.find("p", class_="list-title").find("a")["href"]
                 detail_res = requests.get(detail_link)
                 detail_soup = BeautifulSoup(detail_res.text, "html.parser")
 
-                # Ekstrak journal & doi
                 journal_tag = detail_soup.find("td", class_="tablecell jref")
                 journal_conference_name = journal_tag.text.strip() if journal_tag else None
                 doi_tag = detail_soup.find("a", href=lambda href: href and "doi.org" in href)
@@ -76,24 +71,20 @@ def scrape_titles():
 
     print(f"Total data baru: {len(all_data)}")
 
-    # Simpan atau gabungkan ke CSV dan JSON
-    csv_file = "judul_penelitian.csv"
-    json_file = "judul_penelitian.json"
+    csv_file = "data/judul_penelitian.csv"
+    json_file = "data/judul_penelitian.json"
     new_df = pd.DataFrame(all_data)
 
-    # Gabung dengan data lama jika ada
     if os.path.exists(csv_file):
         old_df = pd.read_csv(csv_file)
         combined_df = pd.concat([old_df, new_df], ignore_index=True)
     else:
         combined_df = new_df
 
-    # Hapus duplikat berdasarkan title (case-insensitive)
     combined_df["title_lower"] = combined_df["title"].str.lower()
     combined_df.drop_duplicates(subset=["title_lower"], inplace=True)
     combined_df.drop(columns=["title_lower"], inplace=True)
 
-    # Simpan ke CSV dan JSON
     combined_df.to_csv(csv_file, index=False, encoding="utf-8")
     combined_df.to_json(json_file, orient="records", indent=4, force_ascii=False)
 

@@ -5,13 +5,13 @@ import os
 import scraping.scraping as scraping
 import json
 from training.train_topic_model import run_training
+from bertopic import BERTopic
 
 app = FastAPI()
-
-# Tambahkan CORS agar bisa diakses dari frontend
+ 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Bisa disesuaikan dengan kebutuhan frontend
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -23,7 +23,7 @@ def home():
 
 @app.get("/titles/")
 def read_titles():
-    csv_file = "judul_penelitian.csv"
+    csv_file = "data/judul_penelitian.csv"
     if not os.path.exists(csv_file):
         raise HTTPException(status_code=404, detail="File CSV tidak ditemukan. Jalankan endpoint /scrape terlebih dahulu.")
 
@@ -37,7 +37,7 @@ def read_titles():
 
 @app.get("/data/")
 def get_full_data():
-    json_file = "judul_penelitian.json"
+    json_file = "data/judul_penelitian.json"
     if not os.path.exists(json_file):
         raise HTTPException(status_code=404, detail="File JSON tidak ditemukan. Jalankan endpoint /scrape terlebih dahulu.")
 
@@ -61,6 +61,29 @@ def train_topic_model_endpoint():
     try:
         run_training()
         return {"message": "Training berhasil! Model disimpan."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/topics/")
+def get_topics():
+    try: 
+        model_path = "models/bertopic_model"
+        if not os.path.exists(model_path):
+            raise HTTPException(status_code=404, detail="Model tidak ditemukan. Jalankan endpoint /train-topic-model terlebih dahulu.")
+ 
+        topic_model = BERTopic.load(model_path)
+ 
+        topics = topic_model.get_topics()
+ 
+        topics_result = []
+        for topic_id, words in topics.items():
+            topics_result.append({
+                "topic_id": topic_id,
+                "words": [word for word, _ in words]
+            })
+        
+        return {"topics": topics_result}
+    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
