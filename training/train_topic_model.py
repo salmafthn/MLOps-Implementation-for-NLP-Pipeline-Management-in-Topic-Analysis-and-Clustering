@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import shutil
+import json
 from bertopic import BERTopic
 from training.evaluate_topic_model import evaluate_coherence 
 
@@ -49,3 +50,14 @@ def run_training():
         print("Model baru disimpan, karena memiliki coherence score lebih tinggi.")
     else:
         print("Coherence score baru tidak lebih tinggi, model tidak di-overwrite.")
+
+    # Simpan hasil untuk dikonsumsi script lain
+    with open("results.json", "w") as f:
+        json.dump({
+            "coherence_score": new_coherence_score,
+            "docs_size": len(docs),
+            "topics": topics
+        }, f)
+
+if __name__ == "__main__":
+    run_training()

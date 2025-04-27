@@ -1,0 +1,16 @@
+artifact_uri: file:///C:/Users/Fathia/OneDrive/Documents/TIF%20%2722/Semester%206/MLOps/Projek%20Akhir/MLOps-Implementation-for-NLP-Pipeline-Management-in-Topic-Analysis-and-Clustering/mlruns/0/877bff80341a4653a6fc6e363e509e16/artifacts
+deleted_time: 1745774067830
+end_time: 1745771398311
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 877bff80341a4653a6fc6e363e509e16
+run_name: clean-mule-283
+run_uuid: 877bff80341a4653a6fc6e363e509e16
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745771282989
+status: 3
+tags: []
+user_id: Fathia
