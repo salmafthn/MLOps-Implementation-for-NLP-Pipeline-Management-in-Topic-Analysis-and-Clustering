@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/264d2db080af4e76b984cd9ea30040c2/artifacts
+end_time: 1745905894140
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 264d2db080af4e76b984cd9ea30040c2
+run_name: smiling-colt-278
+run_uuid: 264d2db080af4e76b984cd9ea30040c2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745905810252
+status: 3
+tags: []
+user_id: lmaos

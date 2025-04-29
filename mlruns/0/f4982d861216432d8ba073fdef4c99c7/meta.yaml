@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/f4982d861216432d8ba073fdef4c99c7/artifacts
+end_time: 1745901139651
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f4982d861216432d8ba073fdef4c99c7
+run_name: bouncy-shark-244
+run_uuid: f4982d861216432d8ba073fdef4c99c7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745901053930
+status: 4
+tags: []
+user_id: lmaos

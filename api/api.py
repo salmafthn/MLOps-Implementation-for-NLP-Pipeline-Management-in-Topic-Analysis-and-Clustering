@@ -60,7 +60,7 @@ def run_scraping():
 def train_topic_model_endpoint():
     try:
         run_training()
-        return {"message": "Training berhasil! Model disimpan."}
+        return {"message": "Training berhasil!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
