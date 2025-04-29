@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import shutil
+import json
 from bertopic import BERTopic
 from training.evaluate_topic_model import evaluate_coherence
 import mlflow
@@ -60,3 +61,23 @@ def run_training():
 
         mlflow.log_artifact(save_path)
 
+<<<<<<< HEAD
+=======
+    if old_coherence_score is None or new_coherence_score > old_coherence_score:
+        clean_directory(save_path)
+        topic_model.save(save_path)
+        print("Model baru disimpan, karena memiliki coherence score lebih tinggi.")
+    else:
+        print("Coherence score baru tidak lebih tinggi, model tidak di-overwrite.")
+
+    # Simpan hasil untuk dikonsumsi script lain
+    with open("results.json", "w") as f:
+        json.dump({
+            "coherence_score": new_coherence_score,
+            "docs_size": len(docs),
+            "topics": topics
+        }, f)
+
+if __name__ == "__main__":
+    run_training()
+>>>>>>> 3978d70ec55f8568fda19925f204bd4f0b5da9c2

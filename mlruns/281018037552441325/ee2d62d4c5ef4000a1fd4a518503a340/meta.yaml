@@ -1,0 +1,16 @@
+artifact_uri: file:///C:/Users/Fathia/OneDrive/Documents/TIF '22/Semester 6/MLOps/Projek
+  Akhir/MLOps-Implementation-for-NLP-Pipeline-Management-in-Topic-Analysis-and-Clustering/mlruns/281018037552441325/ee2d62d4c5ef4000a1fd4a518503a340/artifacts
+end_time: 1745772844660
+entry_point_name: ''
+experiment_id: '281018037552441325'
+lifecycle_stage: active
+run_id: ee2d62d4c5ef4000a1fd4a518503a340
+run_name: bertopic_run
+run_uuid: ee2d62d4c5ef4000a1fd4a518503a340
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745772821259
+status: 4
+tags: []
+user_id: Fathia

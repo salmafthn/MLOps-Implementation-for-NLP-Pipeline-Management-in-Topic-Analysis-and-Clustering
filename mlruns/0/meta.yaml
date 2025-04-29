@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 artifact_location: mlflow-artifacts:/0
 creation_time: 1745898882021
 experiment_id: '0'
 last_update_time: 1745898882021
+=======
+artifact_location: file:///C:/Users/Fathia/OneDrive/Documents/TIF%20%2722/Semester%206/MLOps/Projek%20Akhir/MLOps-Implementation-for-NLP-Pipeline-Management-in-Topic-Analysis-and-Clustering/mlruns/0
+creation_time: 1745767148788
+experiment_id: '0'
+last_update_time: 1745767148788
+>>>>>>> 3978d70ec55f8568fda19925f204bd4f0b5da9c2
 lifecycle_stage: active
 name: Default
