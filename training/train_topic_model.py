@@ -31,7 +31,7 @@ def clean_directory(save_path):
             pass 
 
 def run_training():
-    # Mulai experiment dengan MLflow
+   
     mlflow.set_tracking_uri("http://localhost:5000")
     with mlflow.start_run():
         docs = load_data()
@@ -48,7 +48,6 @@ def run_training():
         new_coherence_score = evaluate_coherence(topic_model, docs)
         print(f"Coherence Score Baru: {new_coherence_score}")
 
-        # Melakukan log ke MLflow
         mlflow.log_param("Coherence Score", new_coherence_score)
         mlflow.log_param("Model Path", save_path)
 
@@ -59,6 +58,5 @@ def run_training():
         else:
             print("Coherence score baru tidak lebih tinggi, model tidak di-overwrite.")
 
-        # Log the trained model to MLflow
         mlflow.log_artifact(save_path)
 
