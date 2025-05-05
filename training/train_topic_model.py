@@ -61,8 +61,6 @@ def run_training():
 
         mlflow.log_artifact(save_path)
 
-<<<<<<< HEAD
-=======
     if old_coherence_score is None or new_coherence_score > old_coherence_score:
         clean_directory(save_path)
         topic_model.save(save_path)
@@ -80,4 +78,3 @@ def run_training():
 
 if __name__ == "__main__":
     run_training()
->>>>>>> 3978d70ec55f8568fda19925f204bd4f0b5da9c2

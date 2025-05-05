@@ -5,13 +5,13 @@ import time
 import os
 import json
 
-base_url = "https://arxiv.org/search/cs?query=machine+learning&searchtype=all&abstracts=show&order=-announced_date_first&size=50&start="
+base_url = "https://arxiv.org/search/?query=text+mining&searchtype=all&source=header"
 
 def scrape_titles():
     all_data = []
 
-    for page in range(50):
-        start = page * 50
+    for page in range(3):
+        start = page 
         url = base_url + str(start)
         print(f"Scraping halaman {page + 1}: {url}")
 
