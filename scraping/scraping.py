@@ -4,6 +4,11 @@ import pandas as pd
 import time
 import os
 import json
+from prometheus_client import start_http_server, Summary, Counter
+
+scraping_duration = Summary('scraping_duration_seconds', 'Time spent scraping a page')
+scraped_pages = Counter('scraped_pages_total', 'Total pages scraped')
+scraped_errors = Counter('scrapping_errors_total', 'Total scrapping error')
 
 base_url = "https://arxiv.org/search/?query=text+mining&searchtype=all&source=header"
 

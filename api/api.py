@@ -6,6 +6,13 @@ import scraping.scraping as scraping
 import json
 from training.train_topic_model import run_training
 from bertopic import BERTopic
+from prometheus_client import Counter, Summary, make_asgi_app
+
+scraping_counter = Counter('scraping_requests_total', 'Total scraping requests')
+training_counter = Counter('training_requests_total', 'Total training requests')
+training_duration = Summary('training_duration_seconds', 'Duration of training process')
+
+app.mount("/metrics", make_asgi_app())
 
 app = FastAPI()
  
